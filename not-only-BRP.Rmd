@@ -662,7 +662,7 @@ sidebarLayout(
 
 Questions?
 
-[`r fa(name = "github")` repository](https://github.com/michelescandola/Open-Science-Presentation) https://github.com/michelescandola/Open-Science-Presentation
+[`r fa(name = "github")` repository](https://github.com/michelescandola/ITRN_Rome2024_Not_Only_BRP) https://github.com/michelescandola/ITRN_Rome2024_Not_Only_BRP
 
 `r fa(name = "twitter")` \@Scandle
 
