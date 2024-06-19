@@ -1,8 +1,8 @@
 ---
-title: "Not only bad research practices"
-subtitle: "the illusion of objectivity and researchers' degrees of freedom"
-author: "Michele Scandola"
-date: "NPSY-Lab.VR & BASIC-NPSY"
+title: "NOT ONLY BAD RESEARCH PRACTICES"
+subtitle: "_The illusion of objectivity and researchers' degrees of freedom_"
+author: "Michele Scandola, PhD"
+date: "NPSY-Lab.VR & BASIC-NPSY<br>Department of Human Sciences<br>University of Verona"
 output:
   slidy_presentation: 
     incremental: yes
@@ -36,6 +36,47 @@ GimmeStar <- function(p, not_trend = FALSE){
   else return("***")
 }
 ```
+
+## Reproducibility crisis
+
+::: center
+<img src="imgs/is_there_repro_crisis.png" width="1000"/>
+:::
+
+
+## Reproducibility crisis
+
+
+:::center
+
+```{r}
+dat <- data.frame(
+  y = c(64, 36, 100-46, 46, 100 - 17, 17),
+  x = c("Psychology", "Psychology",
+        "Cancer Biology", "Cancer Biology",
+        "SCI research", "SCI research"),
+  type = c("Not replicated", "Replicated",
+           "Not replicated", "Replicated",
+           "Not replicated", "Replicated")
+)
+
+ggplot(data = dat, mapping = aes(x="", y=y, fill=type)) +
+  geom_bar(stat="identity", width=1, color="white") +
+  coord_polar("y", start=0) +
+  facet_grid(~x)+
+  theme_void()+
+  scale_fill_brewer(palette = "Set1")+
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
+```
+
+The *Reproducibility Project: Cancer Biology* [@errington2021investigating] was able to replicate the 46% out of 112 studies.
+
+The *Open Science Collaboration* in 2015 [@open2015estimating] was able to replicate the 36% out of 100 studies.
+
+The *FORE-SCI* project in 2012 [@steward2012replication] was able to replicate the 17% out of 12 studies.
+:::
 
 ## A question
 
@@ -79,7 +120,9 @@ GimmeStar <- function(p, not_trend = FALSE){
 
 ## "If I am _objective_"
 
-![](imgs/researcherdof.png){width="700"}<br>[@simonsohn2020specification]
+::: center
+![](imgs/researcherdof.png){width="1200"}<br>[@simonsohn2020specification]
+:::
 
 ## "If I am _objective_"
 
@@ -142,7 +185,7 @@ GimmeStar <- function(p, not_trend = FALSE){
 
 ## "If I am employing state-of-the-art methods"
 
-We want to determine whether, in post-stroke patients with neglect,
+We want to determine whether, in post-stroke patients with neglect,<br>
 high levels of anxiety are associated with more debilitating neglect.
 
 ```{r, echo=FALSE}
@@ -151,25 +194,25 @@ shinyApp(
     fluidRow(
       column(width = 3, "How many groups?"),
       column(width = 3,
-             textAreaInput("n_groups_1", "", "1", width = "50px")
+             textAreaInput("n_groups_1", "", "1", width = "500px")
       ),
       column(width = 3,
-             textAreaInput("n_groups_2", "", "1", width = "50px")
+             textAreaInput("n_groups_2", "", "1", width = "500px")
       ),
       column(width = 3,
-             textAreaInput("n_groups_3", "", "1", width = "50px")
+             textAreaInput("n_groups_3", "", "1", width = "500px")
       )
     ),
     fluidRow(
       column(width = 3, "Which test are we going to use to evaluate anxiety?"),
       column(width = 3,
-             textAreaInput("anx_1", "", "STAI-Y", width = "200px")
+             textAreaInput("anx_1", "", "STAI-Y", width = "500px")
       ),
       column(width = 3,
-             textAreaInput("anx_2", "", "STAI-Y", width = "200px")
+             textAreaInput("anx_2", "", "STAI-Y", width = "500px")
       ),
       column(width = 3,
-             textAreaInput("anx_3", "", "STAI-Y", width = "200px")
+             textAreaInput("anx_3", "", "STAI-Y", width = "500px")
       )
     ),
     fluidRow(
@@ -268,7 +311,7 @@ renderPlot({
       
       out[[i]] <- data.frame(
         p       = p,
-        mean    = m,
+        m       = m,
         ci_low  = ci[1],
         ci_high = ci[2],
         i = i
@@ -304,7 +347,7 @@ renderPlot({
 :::
 
 
-## If I am applying a correct statistical approach
+## "If I am applying a correct statistical approach"
 
 In analysing our data, we can follow one of four main approaches [@gelman2013garden]:
 
@@ -313,7 +356,7 @@ In analysing our data, we can follow one of four main approaches [@gelman2013gar
 3.  `r fa("triangle-exclamation", fill = "orange")` Applying a statistical test on data, that would be different given a different data set (**Researcher's dof**)
 4.  `r fa("skull-crossbones", fill = "red")` Applying all possible choices in data handling and statistical tests (the so-called **fishing**) ![](imgs/sampei.jpg)
 
-## If I am applying a correct statistical approach
+## "If I am applying a correct statistical approach"
 
 -   Data are not passively collected and analysed.
 -   Removing outliers, transforming variables, choosing independent variables and<br>confounders are routine decisions for researchers.
@@ -323,13 +366,18 @@ In analysing our data, we can follow one of four main approaches [@gelman2013gar
 
 [@steegen2016increasing]
 
-## If I am applying a correct statistical approach
+## "If I am applying a correct statistical approach"
 
-Let's imagine that we want to understand if we are able to connect laterality cues to motor answers faster with the upper or the lower limbs.
+Let's imagine that we want to understand if we are able to connect<br>
+laterality cue to motor answers faster with the upper or the lower limbs.
 
-Therefore, we prepared an experiment, where participants had to listen or read the words "Left" or "Right" (**cue**) and, as fast as they can, correctly press the corresponding button (in the "hands" **block**) or pedal (in the "feet" **block**).
+Therefore, we prepared an experiment, where participants had to listen or read<br>
+the words "Left" or "Right" (**cue**) and, as fast as they can,<br>
+correctly press the corresponding button (in the "hands" **block**)<br>
+or pedal (in the "feet" **block**).
 
-Each cue was repeated 20 times per **block:cue** combination, and we collected data from 30 participants (half males, half females).
+Each cue was repeated 20 times per **block:cue** combination,<br>
+and we collected data from 30 participants (half males, half females).
 
 ```{r}
 ## DATA GENERATION
@@ -441,7 +489,7 @@ renderDataTable({
 )
 ```
 
-## If I am applying a correct statistical approach
+## "If I am applying a correct statistical approach"
 
 Research question: Are we faster in connecting laterality cues to motor answers with the upper or the lower limbs?
 
@@ -647,7 +695,7 @@ sidebarLayout(
 )
 ```
 
-## In connclusion
+## In conclusion
 
 ::: center
 * ~~If I am _objective_~~ Because we fail to be objective,
